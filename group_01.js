@@ -16,33 +16,21 @@ function employeeBonus (employee) {
   var bonusAmount;
   var adjustedComp;
   var bonusArray;
-  if (rating === 5) {
-    bonusPercent += 10;
-  }
-  else if (rating === 4) {
-    bonusPercent += 6;
-  }
-  else if (rating === 3) {
-    bonusPercent += 4;
-  }
 
-  if (empNum.length === 4) {
-    bonusPercent += 5;
-  }
+  bonusPercent = ratePercent(bonusPercent,rating);
+  bonusPercent = seniorityBonus(bonusPercent,empNum);
+  bonusPercent = richLuxuryTax(bonusPercent,salary);
 
-  if (salary > 65000) {
-    bonusPercent -= 1;
-  }
-
+  // set the maximum and minimum caps
   bonusPercent = Math.min(bonusPercent, 13);
   bonusPercent = Math.max(bonusPercent, 0);
 
+  // calculate bonusAmount and Adjusted Compensation
   bonusAmount = salary * (bonusPercent/100);
   adjustedComp = salary + bonusAmount;
 
-
+  // build the result array
   bonusArray = [name, bonusPercent, adjustedComp, Math.round(bonusAmount)];
-
   return bonusArray;
 }
 
@@ -51,5 +39,33 @@ function calcBonuses (employeeArrays) {
     console.log(employeeBonus(employeeArrays[i]));
   }
 }
+
+function ratePercent(percent,rating){
+  if (rating === 5) {
+    percent += 10;
+  }
+  else if (rating === 4) {
+    percent += 6;
+  }
+  else if (rating === 3) {
+    percent += 4;
+  }
+  return percent;
+}
+
+function seniorityBonus(percent,empNum){
+  if (empNum.length === 4) {
+    percent += 5;
+  }
+  return percent;
+}
+
+function richLuxuryTax(percent,salary){
+  if (salary > 65000) {
+    percent -= 1;
+  }
+  return percent;
+}
+
 
 calcBonuses(employees);

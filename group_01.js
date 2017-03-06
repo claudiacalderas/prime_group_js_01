@@ -37,7 +37,9 @@ function employeeBonus (employee) {
 function calcBonuses (employeeArrays) {
   for (var i = 0; i < employeeArrays.length; i++) {
     console.log(employeeBonus(employeeArrays[i]));
+    $(".bonusTable").append("<p>" + employeeBonus(employeeArrays[i]) + "</p>");
   }
+
 }
 
 function ratePercent(percent,rating){
@@ -68,4 +70,6 @@ function richLuxuryTax(percent,salary){
 }
 
 
-calcBonuses(employees);
+$(document).ready(function() {
+  calcBonuses(employees);
+});

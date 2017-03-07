@@ -35,11 +35,11 @@ function employeeBonus (employee) {
 }
 
 function calcBonuses (employeeArrays) {
+  var bonuses = [];
   for (var i = 0; i < employeeArrays.length; i++) {
-    console.log(employeeBonus(employeeArrays[i]));
-    $(".bonusTable").append("<p>" + employeeBonus(employeeArrays[i]) + "</p>");
+    bonuses.push(employeeBonus(employeeArrays[i]));
   }
-
+  return bonuses;
 }
 
 function ratePercent(percent,rating){
@@ -68,8 +68,25 @@ function richLuxuryTax(percent,salary){
   }
   return percent;
 }
-
+function produceTable (arrayTable, arrayHeaders) {
+  var tableString = "<table class=\"pure-table\"> <tr>";
+  for (var z = 0; z < arrayHeaders.length; z++) {
+    tableString += "<th>" + arrayHeaders[z] + "</th>";
+  }
+  tableString += "</tr>";
+  for (var i = 0; i < arrayTable.length; i++) {
+    tableString += "<tr>";
+    for (var j = 0; j < arrayTable[i].length; j++) {
+      tableString += "<td>" + arrayTable[i][j] + "</td>";
+    }
+    tableString += "</tr>";
+  }
+  tableString += "</table>";
+  return tableString;
+}
 
 $(document).ready(function() {
-  calcBonuses(employees);
+  var bonusArray = calcBonuses(employees);
+  var bonusHeader = ["Name", "Bonus Percent", "Adjusted Annual Compensation", "Total Bonus"];
+  $('.bonusTable').append(produceTable(bonusArray,bonusHeader));
 });

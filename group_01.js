@@ -69,11 +69,11 @@ function richLuxuryTax(percent,salary){
   return percent;
 }
 function produceTable (arrayTable, arrayHeaders) {
-  var tableString = "<table class=\"pure-table\"> <tr>";
+  var tableString = "<table class=\"pure-table pure-table-striped pure-table-bordered\"> <thead> <tr>";
   for (var z = 0; z < arrayHeaders.length; z++) {
     tableString += "<th>" + arrayHeaders[z] + "</th>";
   }
-  tableString += "</tr>";
+  tableString += "</tr> </thead>";
   for (var i = 0; i < arrayTable.length; i++) {
     tableString += "<tr>";
     for (var j = 0; j < arrayTable[i].length; j++) {
